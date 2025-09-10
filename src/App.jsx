@@ -125,7 +125,7 @@ function RangeSlider({ value, onChange, min = 0, max = 100, step = 0.1, suffix =
           inputMode="decimal"
           className={`w-24 ${INPUT_BASE}`}
           value={value}
-          onChange={onChange}
+          onChange={(e) => onChange({ target: { value: e.target.value } })}
         />
         <span className="text-gray-500">{suffix}</span>
       </div>
@@ -559,7 +559,7 @@ function MortgageTab() {
           <div>
             <div className="font-semibold mb-2">Justér banklån</div>
             <Row label={`Løbetid`} hint={`${bankYears} år`}>
-              <RangeSlider value={m.bankYears} onChange={t('m_bankYears')} min={1} max={30} step={1} suffix="år" />
+              <RangeSlider value={m.bankYears} onChange={t('m_bankYears')} min={10} max={20} step={1} suffix="år" />
             </Row>
             <Row label="Rente (ÅOP)">
               <TextNumber value={m.bankRate} onChange={t('m_bankRate')} suffix="%" width="w-24" />
@@ -756,7 +756,7 @@ export default function App() {
 
             <Row label="AM (%)" hint="Arbejdsmarkedsbidrag">
               {showSlidersSalary ? (
-                <RangeSlider value={inputs.amPct} onChange={onText("amPct")} min={0} max={8} step={0.1} />
+                <RangeSlider value={inputs.amPct} onChange={onText("amPct")} min={0} max={8} step={1} />
               ) : (
                 <TextNumber value={inputs.amPct} onChange={onText("amPct")} suffix="%" width="w-24" />
               )}
@@ -764,7 +764,7 @@ export default function App() {
 
             <Row label="Pension (%)">
               {showSlidersSalary ? (
-                <RangeSlider value={inputs.pensionPct} onChange={onText("pensionPct")} min={0} max={20} step={0.1} />
+                <RangeSlider value={inputs.pensionPct} onChange={onText("pensionPct")} min={0} max={30} step={1} />
               ) : (
                 <TextNumber value={inputs.pensionPct} onChange={onText("pensionPct")} suffix="%" width="w-24" />
               )}
@@ -780,7 +780,7 @@ export default function App() {
 
             <Row label="Skatteprocent (%)" hint="Anvendes på (beløb efter fradrag)">
               {showSlidersSalary ? (
-                <RangeSlider value={inputs.taxRatePct} onChange={onText("taxRatePct")} min={0} max={60} step={0.1} />
+                <RangeSlider value={inputs.taxRatePct} onChange={onText("taxRatePct")} min={0} max={70} step={1} />
               ) : (
                 <TextNumber value={inputs.taxRatePct} onChange={onText("taxRatePct")} suffix="%" width="w-24" />
               )}
@@ -833,7 +833,7 @@ export default function App() {
                     onChange={onText(`${key}Pct`)}
                     min={0}
                     max={100}
-                    step={0.5}
+                    step={1}
                     suffix="%"
                   />
                 ) : (
